@@ -1,20 +1,21 @@
 import './App.css'
-// import FlashCard from './components/flashcard'
-import TextArea from './components/text-area'
-import SubmitButton from './components/submit-button'
+import SummaryPage from './pages/summary-page'
+import FlashCardPage from './pages/flashcard-page'
+import NavBar from './components/navbar'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
 
 function App() {
-
   return (
-    <>
-      <h1>Flashcard Generator</h1>
-      <TextArea />
-      <SubmitButton className='mt-4 w-50' />
-      {/* <div className='flex flex-row justify-center w-auto mt-10'>
-        <FlashCard />
+    <Router>
+      <div className='min-h-full flex flex-col'>
+        <NavBar className='mb-10'/>
+        <Routes>
+          <Route path="/" element={<FlashCardPage className='px-20 '/>} />
+          <Route path="/summary" element={<SummaryPage className='px-20 ' />} />
+        </Routes>
       </div>
-      <p>Click on the flashcard to flip it and see the answer!</p> */}
-    </>
+    </Router>
   )
 }
 
