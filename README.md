@@ -72,3 +72,4 @@ export default defineConfig([
 ])
 ```
 # flashcard-generator
+# flashcard-generator
