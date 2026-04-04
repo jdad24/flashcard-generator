@@ -11,7 +11,6 @@ interface FlashCard {
 
 export default function FlashCardPage({ className }: { className?: string }) {
     const [text, setText] = useState<string>('');
-
     const [flashcards, setFlashcards] = useState<FlashCard[]>([]);
 
     const handleGenerateFlashcards = async (notes: string) => { 
