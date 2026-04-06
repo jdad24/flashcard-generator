@@ -12,10 +12,13 @@ interface FlashCard {
 export default function FlashCardPage({ className }: { className?: string }) {
     const [text, setText] = useState<string>('');
     const [flashcards, setFlashcards] = useState<FlashCard[]>([]);
+    const [loading, setLoading] = useState<boolean>(false);
 
     const handleGenerateFlashcards = async (notes: string) => {
+        setLoading(true);
         const response = await getFlashcards(notes);
         setFlashcards(response.flashcards || []); // Update state with fetched flashcards, or an empty array if there's an error
+        setLoading(false);
     }
 
     return (
@@ -26,15 +29,17 @@ export default function FlashCardPage({ className }: { className?: string }) {
             </div>
             <div className="flex flex-col gap-4 justify-center items-center">
                 <div className="text-white text-xl font-bold">Generated Flashcards</div>
-                <div>
-                    {flashcards.length === 0 ? <p className="text-gray-500">No flashcards generated yet. Please enter your notes and click "Submit".</p>
+                <div className="text-gray-500">
+                    {flashcards.length === 0 ? <p>No flashcards generated yet. Please enter your notes and click "Submit".</p>
                         : <p>Click on a flashcard to reveal the answer</p>}
                 </div>
+                {loading ? <p className="text-gray-500">Generating flashcards...</p> :
                 <div className="grid grid-cols-2 gap-4">
                     {flashcards.map((card, index) => (
                         <FlashCard key={index} question={card?.question} answer={card?.answer} />
                     ))}
                 </div>
+}
             </div>
         </div>
     )

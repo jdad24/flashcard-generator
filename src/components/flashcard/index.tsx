@@ -3,13 +3,13 @@ import { useState } from "react";
 function FlashCard({question, answer}: {question: string, answer: string}) {
     const [isFlipped, setIsFlipped] = useState(false);
     return (
-        <div className="bg-white rounded-lg border-gray-400 border shadow-md shadow-white p-4 w-120 h-50 relative hover:cursor-pointer"
+        <div className={`${isFlipped ? 'bg-gray-300' : 'bg-white'} rounded-lg border-gray-400 border shadow-md shadow-white p-4 w-120 h-50 relative hover:cursor-pointer`}
             onClick={() => setIsFlipped(!isFlipped)}>
-            <div className={`${isFlipped ? 'hidden' : 'block'}`}>
-                <p className="text-black">{question}</p>
+            <div className={`${isFlipped ? 'hidden' : 'block'} flex items-center justify-center h-full`}>
+                <p className="text-black font-bold">{question}</p>
             </div>
-            <div className={`${isFlipped ? 'block' : 'hidden'}`}>
-                <p className="text-black">{answer}</p>
+            <div className={`${isFlipped ? 'block' : 'hidden'} flex items-center justify-center h-full`}>
+                <p className="text-black font-bold">{answer}</p>
             </div>
         </div>
     )
