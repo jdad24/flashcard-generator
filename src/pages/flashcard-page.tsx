@@ -13,21 +13,28 @@ export default function FlashCardPage({ className }: { className?: string }) {
     const [text, setText] = useState<string>('');
     const [flashcards, setFlashcards] = useState<FlashCard[]>([]);
 
-    const handleGenerateFlashcards = async (notes: string) => { 
-        const response = await getFlashcards(notes);        
+    const handleGenerateFlashcards = async (notes: string) => {
+        const response = await getFlashcards(notes);
         setFlashcards(response.flashcards || []); // Update state with fetched flashcards, or an empty array if there's an error
     }
 
     return (
-        <div className={className}>                        
+        <div className={className}>
             <div className="flex flex-col">
                 <TextArea onChange={e => setText(e.target.value)} placeholder="Enter your notes here..." />
                 <SubmitButton className="mt-4 mb-10 w-50" onClick={() => handleGenerateFlashcards(text)} />
             </div>
             <div className="flex flex-col gap-4 justify-center items-center">
-                {flashcards.map((card, index) => (
-                    <FlashCard key={index} question={card?.question} answer={card?.answer} />
-                ))}
+                <div className="text-white text-xl font-bold">Generated Flashcards</div>
+                <div>
+                    {flashcards.length === 0 ? <p className="text-gray-500">No flashcards generated yet. Please enter your notes and click "Submit".</p>
+                        : <p>Click on a flashcard to reveal the answer</p>}
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                    {flashcards.map((card, index) => (
+                        <FlashCard key={index} question={card?.question} answer={card?.answer} />
+                    ))}
+                </div>
             </div>
         </div>
     )

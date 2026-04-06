@@ -19,12 +19,12 @@ export default function Summary({ className }: { className?: string }) {
 
   return (
     <div className={`flex flex-col ${className}`}>
-      {/* <p className='text-white'>This page serves as a simple summary generator for any text of your choice.</p> */}
+      <div className='text-gray-500 mb-4'>Click the "Submit" button to generate a summary of your notes.</div>
       <TextArea onChange={e => setText(e.target.value)} placeholder='Enter your notes here...' />
       <SubmitButton className='mt-4 mb-10 w-50' onClick={() => handleSummaryRequest(text)} />
-      <div>
-        <p className='text-white text-xl text-left font-bold'>Summarized Notes</p>
-        <div className='text-black bg-white border-gray-400 border-4 p-4 rounded-lg w-auto'>
+      <div className='mt-4'>
+        <p className='text-white text-xl text-left font-bold'>Summarized Notes</p>        
+        <div className='text-black bg-white border-gray-400 border-4 p-4 rounded-xl w-auto'>
           {summary && <ul>{formattedSummary}</ul>}
           {!summary && <p>No summary available</p>}
         </div>

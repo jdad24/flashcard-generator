@@ -11,8 +11,8 @@ function App() {
       <div className='min-h-full flex flex-col'>
         <NavBar className='mb-10'/>
         <Routes>
-          <Route path="/" element={<FlashCardPage className='px-20 '/>} />
-          <Route path="/summary" element={<SummaryPage className='px-20 ' />} />
+          <Route path="/" element={<FlashCardPage className='mt-10 px-20 '/>} />
+          <Route path="/summary" element={<SummaryPage className='mt-10 px-20 ' />} />
         </Routes>
       </div>
     </Router>

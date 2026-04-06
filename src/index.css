@@ -3,7 +3,8 @@
 :root {
   --text: black;
   --text-h: #fff;
-  --bg: #000000;
+  /* --bg: background-color: #f8f8f8; */
+  --bg: linear-gradient(135deg, #07021c 0%, #262424 100%);
 
   --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
   --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
