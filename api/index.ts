@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(helmet())
 
-app.use(express.static('dist'));
+// app.use(express.static('dist'));
 
 app.get('/flashcards', async (req, res) => {
   const notes = req.query.notes as string;
