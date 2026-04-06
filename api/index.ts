@@ -16,7 +16,7 @@ app.use(helmet())
 
 // app.use(express.static('dist'));
 
-app.get('/flashcards', async (req, res) => {
+app.get('/api/flashcards', async (req, res) => {
   const notes = req.query.notes as string;
   if (!notes) return res.status(400).json({ error: 'Notes parameter is required' });
 
@@ -48,7 +48,7 @@ app.get('/flashcards', async (req, res) => {
   }
 });
 
-app.get('/summarize', async (req, res) => {
+app.get('/api/summarize', async (req, res) => {
   const notes = req.query.notes as string;
 
   if (!notes) return res.status(400).json({ error: 'Notes parameter is required' });
