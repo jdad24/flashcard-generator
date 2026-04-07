@@ -7,7 +7,7 @@ export default function NavBar({className}: {className?: string}) {
             <div className='text-md flex flex-row gap-10 ml-40'>
                 <Link to="/" className='hover:text-blue-300 hover:scale-110'>Flashcards</Link>
                 <Link to="/summary" className='hover:text-blue-300 hover:scale-110'>Summary</Link>
-                <Link to="http://github.com/jdad24" className='hover:text-blue-300 hover:scale-110'>Other Projects (GitHub)</Link>
+                <Link to="http://github.com/jdad24" target='_blank' rel="noopener noreferrer" className='hover:text-blue-300 hover:scale-110'>Other Projects (GitHub)</Link>
             </div>
         </nav>
     )

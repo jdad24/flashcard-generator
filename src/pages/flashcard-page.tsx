@@ -3,6 +3,7 @@ import TextArea from "../components/text-area";
 import SubmitButton from "../components/submit-button";
 import { useState } from "react"
 import { getFlashcards } from "../services";
+import Ripples from "../assets/ripples.svg"
 
 interface FlashCard {
     question: string;
@@ -33,7 +34,7 @@ export default function FlashCardPage({ className }: { className?: string }) {
                     {flashcards.length === 0 ? <p>No flashcards generated yet. Please enter your notes and click "Submit".</p>
                         : <p>Click on a flashcard to reveal the answer</p>}
                 </div>
-                {loading ? <p className="text-gray-500">Generating flashcards...</p> :
+                {loading ? <img className="w-20" src={Ripples} alt="Loading" /> :
                 <div className="grid grid-cols-2 gap-4">
                     {flashcards.map((card, index) => (
                         <FlashCard key={index} question={card?.question} answer={card?.answer} />
