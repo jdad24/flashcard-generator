@@ -1,7 +1,7 @@
 import FlashCard from "../components/flashcard"
 import TextArea from "../components/text-area";
 import SubmitButton from "../components/submit-button";
-import { useState } from "react"
+import { useState, useEffect, useRef } from "react"
 import { getFlashcards } from "../services";
 import Ripples from "../assets/ripples.svg"
 
@@ -15,11 +15,40 @@ export default function FlashCardPage({ className }: { className?: string }) {
     const [flashcards, setFlashcards] = useState<FlashCard[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
 
+    const flashcardRef = useRef(null)
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                addMoreFlashcards(text)
+            }
+        })
+    })
+
+    useEffect(() => {
+        const lastFlashCard = flashcardRef.current;
+        if (lastFlashCard) {
+            observer.observe(lastFlashCard);
+        }
+        return () => {
+            if (lastFlashCard) {
+                observer.unobserve(lastFlashCard);
+            }
+        }
+    }, [flashcards])
+
     const handleGenerateFlashcards = async (notes: string) => {
         setLoading(true);
         const response = await getFlashcards(notes);
         setFlashcards(response.flashcards || []); // Update state with fetched flashcards, or an empty array if there's an error
         setLoading(false);
+    }
+
+    const addMoreFlashcards = async (notes: string) => {
+        // setLoading(true);
+        const response = await getFlashcards(notes);
+        setFlashcards(prevFlashcards => [...prevFlashcards, ...(response.flashcards || [])]);
+        // setLoading(false);
     }
 
     return (
@@ -37,7 +66,7 @@ export default function FlashCardPage({ className }: { className?: string }) {
                 {loading ? <img className="w-20" src={Ripples} alt="Loading" /> :
                 <div className="grid grid-cols-2 gap-4">
                     {flashcards.map((card, index) => (
-                        <FlashCard key={index} question={card?.question} answer={card?.answer} />
+                        <FlashCard key={index} question={card?.question} answer={card?.answer} ref={index==flashcards.length-1 ? flashcardRef : null} />
                     ))}
                 </div>
 }

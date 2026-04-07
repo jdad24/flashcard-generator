@@ -1,9 +1,9 @@
 import { useState } from "react";
 
-function FlashCard({question, answer}: {question: string, answer: string}) {
+function FlashCard({question, answer, ref}: {question: string, answer: string, ref: any}) {
     const [isFlipped, setIsFlipped] = useState(false);
     return (
-        <div className={`${isFlipped ? 'bg-gray-300' : 'bg-white'} rounded-lg border-gray-400 border shadow-md shadow-white p-4 w-120 h-50 relative hover:cursor-pointer`}
+        <div ref={ref} className={`${isFlipped ? 'bg-gray-300' : 'bg-white'} rounded-lg border-gray-400 border shadow-md shadow-white p-4 w-120 h-50 relative hover:cursor-pointer`}
             onClick={() => setIsFlipped(!isFlipped)}>
             <div className={`${isFlipped ? 'hidden' : 'block'} flex items-center justify-center h-full`}>
                 <p className="text-black font-bold">{question}</p>
