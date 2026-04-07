@@ -61,7 +61,7 @@ export default function FlashCardPage({ className }: { className?: string }) {
                 <div className="text-white text-xl font-bold">Generated Flashcards</div>
                 <div className="text-gray-500">
                     {flashcards.length === 0 ? <p>No flashcards generated yet. Please enter your notes and click "Submit".</p>
-                        : <p>Click on a flashcard to reveal the answer</p>}
+                        : <p>Click on a flashcard to reveal the answer. Scroll down to generate more flashcards.</p>}
                 </div>
                 {loading ? <img className="w-20" src={Ripples} alt="Loading" /> :
                 <div className="grid grid-cols-2 gap-4">
