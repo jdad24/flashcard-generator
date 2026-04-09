@@ -64,7 +64,7 @@ export default function FlashCardPage({ className }: { className?: string }) {
                         : <p>Click on a flashcard to reveal the answer. Scroll down to generate more flashcards.</p>}
                 </div>
                 {loading ? <img className="w-20" src={Ripples} alt="Loading" /> :
-                <div className="grid grid-cols-2 gap-4">
+                <div className="flex flex-col lg:grid lg:grid-cols-2 gap-4">
                     {flashcards.map((card, index) => (
                         <FlashCard key={index} question={card?.question} answer={card?.answer} ref={index==flashcards.length-1 ? flashcardRef : null} />
                     ))}
