@@ -25,7 +25,7 @@ export default function Summary({ className }: { className?: string }) {
     <div className={`flex flex-col ${className}`}>
       <div className='text-gray-500 mb-4'>Click the "Submit" button to generate a summary of your notes.</div>
       <TextArea onChange={e => setText(e.target.value)} placeholder='Enter your notes here...' />
-      <div className='flex flex-row gap-4'>
+      <div className='flex flex-row gap-4 justify-center items-center lg:justify-start lg:items-start'>
         <SubmitButton className='mt-4 mb-10 w-50' onClick={() => handleSummaryRequest(text)} />
        {loading ?  <img className='w-15' src={Ripples} alt="Loading" /> : null}
       </div>
