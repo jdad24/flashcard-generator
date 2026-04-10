@@ -3,7 +3,7 @@ import express from 'express';
 import helmet from 'helmet';
 import Groq from "groq-sdk";
 import dotenv from "dotenv";
-import logRequest from '../server/services/logging';
+import logRequest from '../server/services/logging.js';
 
 dotenv.config();
 
