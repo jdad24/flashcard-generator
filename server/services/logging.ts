@@ -1,4 +1,4 @@
-import pool from '../db.ts';
+import pool from '../db';
 
 export default  async function logRequest(endpoint: string, requestData: any, responseData: any) {
   const query = `
