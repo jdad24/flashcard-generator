@@ -3,6 +3,7 @@ import express from 'express';
 import helmet from 'helmet';
 import Groq from "groq-sdk";
 import dotenv from "dotenv";
+import logRequest from './services/logging.ts';
 
 dotenv.config();
 
@@ -41,9 +42,13 @@ app.get('/api/flashcards', async (req, res) => {
     const jsonString = result.substring(startedIndex, endedIndex);
     const flashcards = JSON.parse(jsonString);
     console.log('Generated flashcards:', flashcards);
+    logRequest('/api/flashcards', { notes }, flashcards);
+
     return res.json({ flashcards });
   } catch (error) {
     console.error('Error parsing flashcards:', error);
+    logRequest('/api/flashcards', { notes }, { error: 'Failed to parse flashcards' });
+
     return res.status(500).json({ error: 'Failed to parse flashcards' });
   }
 });
@@ -68,11 +73,12 @@ app.get('/api/summarize', async (req, res) => {
     });
 
     const result = response.choices[0].message.content;
+    logRequest('/api/summarize', { notes }, { summary: result });
     return res.json({ summary: result });
-
 
   } catch (error) {
     console.error('Error generating content:', error);
+    logRequest('/api/summarize', { notes }, { error: 'Failed to generate content' });
     return res.status(500).json({ error: 'Failed to generate content' });
   }
 });
