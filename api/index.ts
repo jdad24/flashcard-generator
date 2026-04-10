@@ -42,7 +42,7 @@ app.get('/api/flashcards', async (req, res) => {
     const jsonString = result.substring(startedIndex, endedIndex);
     const flashcards = JSON.parse(jsonString);
     console.log('Generated flashcards:', flashcards);
-    logRequest('/api/flashcards', { notes }, flashcards);
+    await logRequest('/api/flashcards', { notes }, flashcards);
     return res.json({ flashcards });
   } catch (error) {
     console.error('Error parsing flashcards:', error);
@@ -71,13 +71,13 @@ app.get('/api/summarize', async (req, res) => {
     });
 
     const result = response.choices[0].message.content;
-    logRequest('/api/summarize', { notes }, { summary: result });
+    await logRequest('/api/summarize', { notes }, { summary: result });
     return res.json({ summary: result });
 
 
   } catch (error) {
     console.error('Error generating content:', error);
-    logRequest('/api/summarize', { notes }, { error: 'Failed to generate content' });
+    await logRequest('/api/summarize', { notes }, { error: 'Failed to generate content' });
     return res.status(500).json({ error: 'Failed to generate content' });
   }
 });
