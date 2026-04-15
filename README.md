@@ -1,76 +1,85 @@
-# React + TypeScript + Vite
+# Flashcard Generator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React + TypeScript + Vite app that generates study flashcards and note summaries from raw text using an AI backend.
 
-Currently, two official plugins are available:
+## Production Deployment
+  - `https://flashcard-generator-roan.vercel.app/`
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Overview
 
-## React Compiler
+This project includes:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- A frontend built with React, TypeScript, Vite, and Tailwind CSS
+- A simple AI-powered backend using Express and the Groq SDK
+- Flashcard generation from user notes
+- Note summarization into bullet points
+- Infinite scroll-style flashcard loading
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Enter lecture notes, textbook text, or study material
+- Generate flashcards with question/answer pairs
+- Generate summaries as bullet points
+- Navigate between flashcards and summary views
+- Supports future AI-backed enhancements through `/api/flashcards` and `/api/summarize`
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Project Structure
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- `src/` — React application source
+  - `pages/flashcard-page.tsx` — main flashcard generator page
+  - `pages/summary-page.tsx` — note summarization page
+  - `components/` — reusable UI components
+  - `services/` — client-side API helpers
+- `server/` — Express backend for AI requests
+- `api/` — alternate API implementation/export
+- `public/` — static assets
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Setup
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+1. Install dependencies:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+   ```bash
+   npm install
+   ```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-# flashcard-generator
-# flashcard-generator
-# flashcard-generator
+2. Create a `.env` file in the project root with your Groq API key:
+
+   ```env
+   GROQ_API_KEY=your_groq_api_key_here
+   ```
+
+3. Run the frontend development server:
+    - `npm run dev`
+
+4. Start the backend server separately if needed:
+    - `npm run server` 
+
+   - The Express app source is in `server/index.ts` and exposes:
+     - `GET /api/flashcards?notes=<text>`
+     - `GET /api/summarize?notes=<text>`
+
+## Usage
+
+- Open the app in the browser from Vite's local dev server
+- Enter notes into the text area on the Flashcards page
+- Click `Submit` to generate flashcards
+- Scroll to load additional flashcards automatically
+- Visit the Summary page to generate a condensed note summary
+
+## Scripts
+
+- `npm run dev` — start Vite development server
+- `npm run server` - start express server
+- `npm run build` — build the app for production
+- `npm run preview` — preview the production build
+- `npm run lint` — run ESLint
+
+## Notes
+
+- The backend uses `@google/generative-ai` powered through Groq and the `openai/gpt-oss-20b` model.
+- The request logger stores entries in the configured database via `server/services/logging.ts`.
+- If you add a backend start script, ensure TypeScript files are compiled or run with a compatible runtime.
+
+## License
+
+This repo does not specify a license. Add one if you plan to share it publicly.
